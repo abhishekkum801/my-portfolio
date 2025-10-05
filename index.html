@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhishek Kumar | Network Security Engineer</title>
+  
+  <!-- Icon Library (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- All CSS is now in this single style block -->
+  <style>
+    /* ===== GLOBAL & FONT STYLES ===== */
+    :root {
+      --navbar-height: 60px; /* Define navbar height as a variable */
+    }
+
+    html {
+      scroll-behavior: smooth; /* Enables smooth scrolling for the whole page */
+      scroll-padding-top: var(--navbar-height); /* Prevents content from being hidden under the fixed navbar */
+    }
+
+    body { 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+      background: #f0f2f5;
+    }
+
+    /* ===== NAVIGATION BAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: var(--navbar-height);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0056b3;
+      text-decoration: none;
+    }
+    .menu-items {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .menu-items li {
+      margin-left: 25px;
+    }
+    .menu-items a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding-bottom: 5px;
+      position: relative;
+    }
+    .menu-items a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #007BFF;
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    .menu-items a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu Styles */
+    .hamburger-checkbox { display: none; }
+    .hamburger-lines { display: none; }
+
+    /* ===== HERO SECTION ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 40px 20px;
+      padding-top: var(--navbar-height); /* Offset for fixed navbar */
+      position: relative;
+      overflow: hidden;
+    }
+    #portrait { 
+      margin-bottom: 30px; 
+    }
+    #portrait img {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 4px solid #007BFF;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    #hero h1 { font-size: 3.5rem; margin-bottom: 15px; color: #2d3748; }
+    #hero p { color: #4a5568; font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; }
+    .btn {
+      padding: 12px 25px; border-radius: 10px;
+      background: linear-gradient(135deg, #007BFF, #0056b3);
+      color: #fff; font-weight: 600; text-decoration: none;
+      display: inline-block;
+      border: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin: 5px;
+    }
+    .btn:hover { 
+      background: linear-gradient(135deg, #0056b3, #007BFF); 
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3); 
+    }
+    
+    /* ===== GENERAL SECTION STYLES ===== */
+    section { padding: 80px 20px; text-align: center; color: #333; background: #f0f2f5; }
+    section h2 {
+      font-size: 2.8rem; margin-bottom: 50px; color: #007BFF;
+      position: relative; display: inline-block;
+    }
+    section h2::after {
+      content: ''; position: absolute; width: 80px; height: 3px;
+      background: #007BFF; bottom: -10px; left: 50%;
+      transform: translateX(-50%); 
+    }
+
+    /* ===== GLASSMORPHISM CARD STYLES ===== */
+    .glass {
+      backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 25px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    }
+    .glass:hover { box-shadow: 0 15px 35px rgba(0, 123, 255, 0.15); }
+    
+    /* ===== ABOUT SECTION (Modernized) ===== */
+    .about-intro { max-width: 800px; margin: 0 auto 50px auto; font-size: 1.15rem; line-height: 1.7; color: #4a5568; }
+    .about-highlights { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 60px; }
+    .highlight-card { flex: 1; min-width: 250px; max-width: 300px; padding: 30px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .highlight-icon { font-size: 2.5rem; color: #007BFF; margin-bottom: 15px; }
+    .highlight-card h3 { margin: 0 0 10px 0; color: #2d3748; font-size: 1.25rem; }
+    .highlight-card p { margin: 0; color: #4a5568; line-height: 1.5; }
+    .philosophy-title { font-size: 2rem; color: #333; margin-bottom: 30px; font-weight: 600; }
+    .about-philosophy { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+    .philosophy-card { flex: 1; min-width: 260px; max-width: 320px; text-align: left; padding: 25px; }
+    .philosophy-card h4 { font-size: 1.2rem; color: #2d3748; margin: 0 0 10px 0; display: flex; align-items: center; }
+    .philosophy-card h4 i { color: #007BFF; margin-right: 12px; font-size: 1.1rem; }
+    .philosophy-card p { margin: 0; color: #4a5568; line-height: 1.6; }
+
+    /* ===== SKILLS SECTION ===== */
+    .skills-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+    .skill-card { flex: 1; min-width: 280px; max-width: 500px; text-align: left; padding: 20px; }
+    .skill-pill {
+      display: inline-block; margin: 5px 5px 10px 0; padding: 8px 14px;
+      background: linear-gradient(135deg, #007BFF, #0056b3);
+      color: #fff; border-radius: 15px; font-size: 0.9rem; font-weight: 600;
+    }
+    .skill-pill:hover { box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); }
+
+    /* ===== PROJECTS SECTION ===== */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; justify-items: center; }
+    .project-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+    .project-card { text-align: left; height: 100%; box-sizing: border-box; }
+    .project-card h3 { color: #2d3748; }
+    .project-card p { color: #4a5568; line-height: 1.5; }
+
+    /* ===== CONTACT & RESUME SECTION ===== */
+    .contact-resume-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+    .resume-card, .contact-card { flex: 1; min-width: 300px; max-width: 450px; padding: 30px; text-align: left; }
+    .contact-list { list-style: none; padding-left: 0; margin-top: 15px; }
+    .contact-list li { 
+      margin: 15px 0; 
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    .contact-list li i {
+      color: #007BFF;
+      font-size: 1.2rem;
+      margin-right: 15px;
+      width: 20px;
+      text-align: center;
+    }
+    .contact-list a { color: #0056b3; text-decoration: none; font-weight: 500;}
+    .contact-list a:hover { text-decoration: underline; }
+
+    /* ===== WHATSAPP FLOATING ACTION BUTTON ===== */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      color: #FFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      z-index: 999;
+      transition: transform 0.2s ease-in-out;
+    }
+    .whatsapp-fab:hover {
+      transform: scale(1.1);
+    }
+
+    /* ===== FOOTER ===== */
+    footer { text-align: center; padding: 30px 20px; color: #555; background: #e9ecef; font-size: 0.9rem; }
+
+    /* ===== RESPONSIVE STYLES ===== */
+    @media (max-width: 768px) {
+      /* Mobile Navigation Bar */
+      .navbar-container { padding: 0 20px; }
+      .menu-items {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: var(--navbar-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--navbar-height));
+        background: white;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        padding: 0;
+      }
+      .menu-items li { margin: 20px 0; }
+      .menu-items a { font-size: 1.2rem; }
+      .hamburger-lines {
+        display: block;
+        height: 20px;
+        width: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      .hamburger-lines .line {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: #333;
+        border-radius: 10px;
+      }
+      .hamburger-checkbox:checked ~ .menu-items {
+        transform: translateX(0);
+      }
+
+      /* Other responsive adjustments */
+      .about-container, .skills-container, .contact-resume-container { flex-direction: column; align-items: center; }
+      .about-left, .about-right, .contact-card, .resume-card { text-align: center; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .whatsapp-fab { width: 50px; height: 50px; font-size: 1.8rem; } /* Slightly smaller FAB for mobile */
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Top Navigation Bar ===== -->
+<header class="navbar">
+  <div class="navbar-container">
+    <a href="#hero" class="logo">Abhishek Kumar</a>
+    <input type="checkbox" class="hamburger-checkbox" id="hamburger-toggle">
+    <label for="hamburger-toggle" class="hamburger-lines">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </label>
+    <ul class="menu-items">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact-resume">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ===== Hero Section ===== -->
+<section id="hero">
+  <div id="portrait">
+    <img src="abhishek-kumar-portrait.jpg" alt="Abhishek Kumar">
+  </div>
+  <div class="hero-content">
+    <h1>Abhishek Kumar</h1>
+    <p>Network Security Engineer — Building secure, automated network infrastructures with hands-on expertise in firewalls, routing, VPNs, and cloud.</p>
+    <div class="buttons">
+      <a href="Abhishek_Kumar_Resume_2025.pdf" target="_blank" class="btn">Download Resume</a>
+      <a href="https://linkedin.com/in/abhishek" target="_blank" class="btn">LinkedIn</a>
+      <a href="https://github.com/abhishekkumar" target="_blank" class="btn">GitHub</a>
+      <a href="#contact-resume" class="btn">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About Section ===== -->
+<section id="about">
+  <h2>About Me</h2>
+  <p class="about-intro">
+    I'm a Network Security Engineer who thrives on building resilient and secure digital infrastructures. For me, it's like solving a complex puzzle—blending deep technical knowledge of routing and firewalls with modern automation practices. I don't just configure networks; I engineer them to be robust, repeatable, and ready for the future.
+  </p>
+  <div class="about-highlights">
+    <div class="glass highlight-card">
+      <i class="fas fa-briefcase highlight-icon"></i>
+      <h3>Experience</h3>
+      <p>Software Engineer at GlobalLogic India (2022-2023)</p>
+    </div>
+    <div class="glass highlight-card">
+      <i class="fas fa-graduation-cap highlight-icon"></i>
+      <h3>Education</h3>
+      <p>B.Tech in CSE from BPUT Odisha, CGPA 8.24</p>
+    </div>
+    <div class="glass highlight-card">
+      <i class="fas fa-map-marker-alt highlight-icon"></i>
+      <h3>Location</h3>
+      <p>Bangalore, India</p>
+    </div>
+  </div>
+  <h3 class="philosophy-title">My Core Philosophy</h3>
+  <div class="about-philosophy">
+    <div class="glass philosophy-card">
+      <h4><i class="fas fa-cogs"></i> Automation First</h4>
+      <p>I believe in automating routine tasks to ensure consistency and free up time for more critical challenges.</p>
+    </div>
+    <div class="glass philosophy-card">
+      <h4><i class="fas fa-shield-alt"></i> Security by Design</h4>
+      <p>Security isn't an afterthought. It's a foundational principle integrated into every stage of network design.</p>
+    </div>
+    <div class="glass philosophy-card">
+      <h4><i class="fas fa-flask"></i> Practical Application</h4>
+      <p>Theory is essential, but hands-on lab work and real-world implementation are where true expertise is built.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Skills Section ===== -->
+<section id="skills">
+  <h2>Skills & Expertise</h2>
+  <div class="skills-container">
+    <div class="glass skill-card"><h3>Core Routing & Switching</h3><div class="skill-pill">EIGRP</div><div class="skill-pill">OSPF</div><div class="skill-pill">BGP</div><div class="skill-pill">Switching</div><div class="skill-pill">RIP</div></div>
+    <div class="glass skill-card"><h3>Network Security & Firewall</h3><div class="skill-pill">Palo Alto</div><div class="skill-pill">Cisco ASA/FTD</div><div class="skill-pill">Fortinet</div><div class="skill-pill">Check Point</div><div class="skill-pill">VPN</div></div>
+    <div class="glass skill-card"><h3>Threat Defense & Content Security</h3><div class="skill-pill">NGIPS</div><div class="skill-pill">Cisco WSA</div><div class="skill-pill">Cisco ESA</div><div class="skill-pill">NAC (Cisco ISE)</div></div>
+    <div class="glass skill-card"><h3>Cloud & Virtualization</h3><div class="skill-pill">GCP</div><div class="skill-pill">VMware</div><div class="skill-pill">EVE-NG</div><div class="skill-pill">GNS3</div></div>
+  </div>
+</section>
+
+<!-- ===== Projects Section ===== -->
+<section id="projects">
+  <h2>Projects & Labs</h2>
+  <p style="text-align:center; margin-bottom:40px; color:#555;">20 Real-World Technologies Internship — hands-on learning series to build network and cloud skills.</p>
+  <div class="projects-grid">
+    <a href="#" class="project-link"><div class="glass project-card"><h3>VMware ESXi + Windows VM + RDP</h3><p>Create first Windows VM, access via RDP.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Ubuntu VM + SSH</h3><p>Basic Linux provisioning + remote shell over WAN.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>ESXi Networking + Cisco IOS Router</h3><p>VMs in unique subnets, NAT + reachability.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>pfSense Firewall VM</h3><p>WAN/LAN, static routes, NAT configuration.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>WireGuard VPN</h3><p>Secure tunnel between Paris DC & India clients.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>OpenVPN</h3><p>Site-to-site & client mode; compare with WireGuard.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Tailscale Mesh VPN</h3><p>Zero-config mesh across all students; subnet routing.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>FreeRADIUS + Captive Portal</h3><p>Authentication for local users through pfSense.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>DNS/DHCP Server</h3><p>Central DHCP scopes, internal DNS zones.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Migrate to Proxmox</h3><p>Import VMs, configure virtual bridge & VLAN-aware networking.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>MikroTik RouterOS</h3><p>Create VLANs, NAT, static/dynamic routing.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>OSPF with Cisco + MikroTik</h3><p>Dynamic routing in hybrid lab; verify LSAs & routes.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>FRRouting (Linux Router)</h3><p>Replace Cisco with open-source router; redistribute routes.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>IDS/IPS – Suricata / Zeek</h3><p>Deploy network monitoring & traffic inspection.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Zabbix / Grafana / Prometheus</h3><p>Centralized monitoring for ESXi, Proxmox, routers, VPNs.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Ansible Automation</h3><p>Automate VM config, IP setup, and user creation.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Docker Networking Basics</h3><p>Deploy small web app + reverse proxy integration.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Proxmox Cluster + HA setup</h3><p>Multi-node cluster; migrate VM live between nodes.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Backups, Snapshots & Restore</h3><p>Run complete backup policy; disaster recovery drill.</p></div></a>
+    <a href="#" class="project-link"><div class="glass project-card"><h3>Final Integration Project</h3><p>Cohesive infra: Proxmox + pfSense + MikroTik + Cisco + VPN + Monitoring.</p></div></a>
+  </div>
+</section>
+
+<!-- ===== Resume & Contact Section ===== -->
+<section id="contact-resume">
+  <h2>Get In Touch</h2>
+  <div class="contact-resume-container">
+    <div class="glass resume-card">
+      <h3>Download My Resume</h3>
+      <p>My resume provides a more detailed look at my skills and experience.</p>
+      <a href="Abhishek_Kumar_Resume_2025.pdf" target="_blank" class="btn">Download Resume (PDF)</a>
+    </div>
+    <div class="glass contact-card">
+      <h3>Contact Details</h3>
+      <p>I'm actively seeking new opportunities. Feel free to reach out if you have a fitting role or just want to connect!</p>
+      <ul class="contact-list">
+        <li><i class="fas fa-envelope"></i> <a href="mailto:abhishek.kum801@gmail.com">abhishek.kum801@gmail.com</a></li>
+        <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/abhishek" target="_blank">linkedin.com/in/abhishek</a></li>
+        <!-- CORRECTED WHATSAPP LINK -->
+        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/919348286835?text=Hello%20Abhishek,%20I'm%20contacting%20you%20from%20your%20portfolio." target="_blank">Message on WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <p>© 2025 Abhishek Kumar — Network Security Engineer | Bangalore, India</p>
+  <p>Built with HTML & CSS — Hosted on GitHub Pages</p>
+</footer>
+
+<!-- ===== WhatsApp Floating Action Button (CORRECTED LINK) ===== -->
+<a href="https://wa.me/919348286835?text=Hello%20Abhishek,%20I'm%20contacting%20you%20from%20your%20portfolio." class="whatsapp-fab" target="_blank" aria-label="Message me on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- JavaScript to close mobile menu on link click -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const hamburgerCheckbox = document.getElementById('hamburger-toggle');
+    const menuLinks = document.querySelectorAll('.menu-items a');
+
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerCheckbox.checked = false;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
